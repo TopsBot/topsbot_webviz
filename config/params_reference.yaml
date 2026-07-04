@@ -1,0 +1,44 @@
+# topsbot_webviz 参数参考（不自动加载）
+#
+# 本文件仅供查阅与复制，launch 默认不会加载它。
+# 场景配置见 config/tbmem_jpeg_zc.yaml 等全量 yaml；默认启动：tbmem_jpeg_zc.yaml
+#
+# 运行中查看生效值：
+#   ros2 param list /webviz_node
+#   ros2 param dump /webviz_node
+#
+# 图像订阅参数（TOPSBOT 软性约定，与 topsbot_cv / topsbot_yolo_det 对齐）：
+#   input_topic + input_msg +（仅 tb_img）tb_img_profile
+# 详见 config/README.md 中与 topsbot_usb_cam 的成对表。
+
+/**:
+  ros__parameters:
+  # --- 部署与 WebSocket ---
+    deployment: multi_instance        # multi_instance | gateway（四路 gateway 用后者）
+    stamp_align: strict               # strict | relaxed（仅 detection_enabled 时 strict 生效）
+    ws_base_port: 8080                # multi_instance：每通道 WS 端口 = base + channel_id * 2
+    gateway_ws_port: 9090             # gateway 模式单端口
+    queue_max: 50                     # 图像/检测匹配队列深度
+
+  # --- 单路通道（channel_count: 1 时生效）---
+    channel_count: 1                  # >1 时用 ch0_* … chN_*（见 4ch_gateway.yaml）
+    channel_id: 0                     # 通道 ID，影响 WS 端口与前端 channel_id
+    channel_name: Cam-01                # 前端显示名
+    jpeg_quality: 75                  # NV12/RGB → JPEG 编码质量（板端 ta-cv）
+
+  # --- 检测框叠加（可选）---
+    detection_topic: /detections      # tb_det_msgs/TbPerceptionTargets
+    detection_enabled: false          # true 时订阅检测并与图像帧对齐
+
+  # --- 图像订阅（input_msg 约定）---
+    input_topic: /tbmem_jpeg          # 订阅话题；双相机 namespace 示例：/cam0/tbmem_img
+    input_msg: tb_jpeg                # tb_jpeg | tb_img | sensor_image | sensor_compressed
+    tb_img_profile: 480p              # 640×480 配合 usb_cam；与 TbMsg480P 对应
+
+  # --- input_msg 与典型 upstream（topsbot_usb_cam params_file）---
+  # tb_jpeg           + /tbmem_jpeg           ← mjpeg_640x480_zc.yaml
+  # tb_img            + /tbmem_img             ← mjpeg2nv12_640x480_zc.yaml / mjpeg2rgb_640x480_zc.yaml
+  # sensor_image      + /image_raw             ← mjpeg2nv12_640x480_sensor.yaml（运行时看 encoding）
+  # sensor_compressed + /image_raw/compressed  ← mjpeg_640x480_compressed.yaml
+  #
+  # 旧参数 input_mode / input_compressed 仍可读，启动时会 WARN 并映射到 input_msg。

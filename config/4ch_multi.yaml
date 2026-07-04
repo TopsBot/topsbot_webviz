@@ -1,0 +1,32 @@
+# 四路 multi_instance — 由 webviz_4ch.launch.py 拆成 4 个节点
+/**:
+  ros__parameters:
+    deployment: multi_instance
+    stamp_align: strict
+    ws_base_port: 8080
+    queue_max: 50
+    channel_count: 4
+    ch0_id: 0
+    ch0_name: Cam-01
+    ch0_input_msg: tb_jpeg
+    ch0_input_topic: /tbmem_jpeg
+    ch0_detection_topic: /detections
+    ch0_detection_enabled: false
+    ch1_id: 1
+    ch1_name: Cam-02
+    ch1_input_msg: tb_jpeg
+    ch1_input_topic: /cam1/tbmem_jpeg
+    ch1_detection_topic: /cam1/detections
+    ch1_detection_enabled: false
+    ch2_id: 2
+    ch2_name: Cam-03
+    ch2_input_msg: tb_jpeg
+    ch2_input_topic: /cam2/tbmem_jpeg
+    ch2_detection_topic: /cam2/detections
+    ch2_detection_enabled: false
+    ch3_id: 3
+    ch3_name: Cam-04
+    ch3_input_msg: tb_jpeg
+    ch3_input_topic: /cam3/tbmem_jpeg
+    ch3_detection_topic: /cam3/detections
+    ch3_detection_enabled: false

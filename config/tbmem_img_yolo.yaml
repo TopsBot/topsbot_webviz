@@ -1,0 +1,17 @@
+# TbMsg* 零拷贝 + 检测框 — 配合 topsbot_usb_cam + topsbot_yolo_det
+/**:
+  ros__parameters:
+    deployment: multi_instance
+    stamp_align: strict
+    ws_base_port: 8080
+    gateway_ws_port: 9090
+    queue_max: 50
+    channel_count: 1
+    channel_id: 0
+    channel_name: Cam-01
+    jpeg_quality: 75
+    detection_topic: /detections
+    detection_enabled: true
+    input_msg: tb_img
+    input_topic: /tbmem_img
+    tb_img_profile: 480p

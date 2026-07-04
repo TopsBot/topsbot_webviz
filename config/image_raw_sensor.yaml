@@ -1,0 +1,16 @@
+# sensor_msgs/Image — 配合 topsbot_usb_cam mjpeg2nv12_640x480_sensor.yaml
+/**:
+  ros__parameters:
+    deployment: multi_instance
+    stamp_align: relaxed
+    ws_base_port: 8080
+    gateway_ws_port: 9090
+    queue_max: 50
+    channel_count: 1
+    channel_id: 0
+    channel_name: Cam-01
+    jpeg_quality: 75
+    detection_topic: /detections
+    detection_enabled: false
+    input_msg: sensor_image
+    input_topic: /image_raw
