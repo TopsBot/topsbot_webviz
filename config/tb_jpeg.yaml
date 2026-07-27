@@ -1,0 +1,24 @@
+# 类型配置：TbJpegFrame 零拷贝（单路）
+# 配合 usb_cam mjpeg_640x480_zc.yaml → /tbmem_jpeg
+#
+# max_channel_count: 本文件支持的最大路数
+# channel_count: 默认启用路数（可被 launch channel_count:=N 覆盖，且 ≤ max）
+#
+#   ros2 launch topsbot_webviz webviz.launch.py
+/**:
+  ros__parameters:
+    deployment: gateway
+    stamp_align: relaxed
+    ws_base_port: 8080
+    gateway_ws_port: 9090
+    queue_max: 50
+    max_channel_count: 1
+    channel_count: 1
+    channel_id: 0
+    channel_name: Cam-01
+    jpeg_quality: 75
+    enable_tacv_jpeg: true
+    detection_topic: /detections
+    detection_enabled: false
+    input_msg: tb_jpeg
+    input_topic: /tbmem_jpeg

@@ -1,0 +1,59 @@
+syntax = "proto3";
+package topsbot.web;
+
+message WebFrameMessage {
+  uint32 channel_id = 1;
+  uint64 timestamp_ns = 2;
+  uint64 sequence_id = 3;
+  ImagePayload image = 4;
+  OverlayPayload overlay = 5;
+  SystemStats stats = 6;
+}
+
+message ImagePayload {
+  bytes jpeg = 1;
+  uint32 width = 2;
+  uint32 height = 3;
+  string encoding = 4;
+}
+
+message OverlayPayload {
+  repeated Target targets = 1;
+}
+
+message Target {
+  string type = 1;
+  uint64 track_id = 2;
+  repeated Box boxes = 3;
+  repeated PointSet points = 4;
+}
+
+message Box {
+  string type = 1;
+  float x = 2;
+  float y = 3;
+  float w = 4;
+  float h = 5;
+  float score = 6;
+}
+
+message PointSet {
+  string type = 1;
+  repeated Point points = 2;
+}
+
+message Point {
+  float x = 1;
+  float y = 2;
+  float score = 3;
+}
+
+message SystemStats {
+  repeated StatItem items = 1;
+}
+
+message StatItem {
+  string type = 1;
+  float value = 2;
+  string value_string = 3;
+}

@@ -1,0 +1,37 @@
+# 参数速查（不自动加载）
+#
+# 类型配置命名：按 input 类型（tb_jpeg / tb_img / …），路数写在文件内
+# 默认启动：webviz → tb_jpeg.yaml
+#           webviz_multi → tb_jpeg_multi.yaml（可用 channel_count:=N 覆盖启用路数）
+
+/**:
+  ros__parameters:
+    # --- 部署与通道 ---
+    deployment: multi_instance        # multi_instance（多路默认） | gateway
+    stamp_align: strict               # strict | relaxed
+    ws_base_port: 8080
+    gateway_ws_port: 9090
+    queue_max: 50
+    jpeg_quality: 75
+    enable_tacv_jpeg: true            # true: ta-cv 硬编失败时回退 OpenCV；false: 仅 OpenCV
+
+    max_channel_count: 1              # 本文件槽位上限（多路 yaml 配 ch0_…）
+    channel_count: 1                  # 默认启用路数（≤ max；launch 可覆盖）
+    channel_id: 0
+    channel_name: Cam-01
+
+    # --- 检测叠加（可选）---
+    detection_enabled: false
+    detection_topic: /detections
+
+    # --- 图像订阅（单路）---
+    input_msg: tb_jpeg                # tb_jpeg | tb_img | sensor_image | sensor_compressed
+    input_topic: /tbmem_jpeg
+    tb_img_profile: 480p              # 仅 input_msg=tb_img
+
+  # --- input_msg 与典型 upstream（topsbot_usb_cam）---
+  # tb_jpeg           + /tbmem_jpeg           ← mjpeg_640x480_zc.yaml
+  # tb_img            + /tbmem_img             ← mjpeg2nv12_*_zc / mjpeg2rgb_*_zc
+  # sensor_image      + /image_raw             ← *_sensor.yaml
+  # sensor_compressed + /image_raw/compressed  ← *_compressed.yaml
+  # 多相机 namespace：/cam0/tbmem_img、/cam1/tbmem_img（见 tb_img_multi.yaml）

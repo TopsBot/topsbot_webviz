@@ -1,0 +1,21 @@
+# 类型配置：sensor_msgs/CompressedImage（单路）
+# 配合 usb_cam *_compressed.yaml → /image_raw/compressed
+#
+#   ros2 launch topsbot_webviz webviz.launch.py params_file:=sensor_compressed.yaml
+/**:
+  ros__parameters:
+    deployment: gateway
+    stamp_align: relaxed
+    ws_base_port: 8080
+    gateway_ws_port: 9090
+    queue_max: 50
+    max_channel_count: 1
+    channel_count: 1
+    channel_id: 0
+    channel_name: Cam-01
+    jpeg_quality: 75
+    enable_tacv_jpeg: true
+    detection_topic: /detections
+    detection_enabled: false
+    input_msg: sensor_compressed
+    input_topic: /image_raw/compressed

@@ -1,0 +1,22 @@
+# 类型配置：TbMsg* 零拷贝（单路，无 namespace）
+# 配合 usb_cam mjpeg2nv12_*_zc / mjpeg2rgb_*_zc → /tbmem_img
+#
+#   ros2 launch topsbot_webviz webviz.launch.py params_file:=tb_img.yaml
+/**:
+  ros__parameters:
+    deployment: gateway
+    stamp_align: strict
+    ws_base_port: 8080
+    gateway_ws_port: 9090
+    queue_max: 50
+    max_channel_count: 1
+    channel_count: 1
+    channel_id: 0
+    channel_name: Cam-01
+    jpeg_quality: 75
+    enable_tacv_jpeg: true
+    detection_topic: /detections
+    detection_enabled: false
+    input_msg: tb_img
+    input_topic: /tbmem_img
+    tb_img_profile: 480p

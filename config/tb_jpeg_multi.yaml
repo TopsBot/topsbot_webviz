@@ -1,0 +1,38 @@
+# 类型配置：TbJpegFrame 多路
+# 默认 multi_instance；可用 launch deployment:=gateway 覆盖。
+#
+#   ros2 launch topsbot_webviz webviz_multi.launch.py params_file:=tb_jpeg_multi.yaml
+#   ros2 launch topsbot_webviz webviz_multi.launch.py channel_count:=4
+/**:
+  ros__parameters:
+    deployment: multi_instance
+    stamp_align: strict
+    ws_base_port: 8080
+    queue_max: 50
+    enable_tacv_jpeg: true
+    max_channel_count: 4
+    channel_count: 2
+    ch0_id: 0
+    ch0_name: Cam-01
+    ch0_input_msg: tb_jpeg
+    ch0_input_topic: /cam0/tbmem_jpeg
+    ch0_detection_topic: /cam0/detections
+    ch0_detection_enabled: false
+    ch1_id: 1
+    ch1_name: Cam-02
+    ch1_input_msg: tb_jpeg
+    ch1_input_topic: /cam1/tbmem_jpeg
+    ch1_detection_topic: /cam1/detections
+    ch1_detection_enabled: false
+    ch2_id: 2
+    ch2_name: Cam-03
+    ch2_input_msg: tb_jpeg
+    ch2_input_topic: /cam2/tbmem_jpeg
+    ch2_detection_topic: /cam2/detections
+    ch2_detection_enabled: false
+    ch3_id: 3
+    ch3_name: Cam-04
+    ch3_input_msg: tb_jpeg
+    ch3_input_topic: /cam3/tbmem_jpeg
+    ch3_detection_topic: /cam3/detections
+    ch3_detection_enabled: false

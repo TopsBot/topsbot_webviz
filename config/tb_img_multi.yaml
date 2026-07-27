@@ -1,0 +1,50 @@
+# 类型配置：TbMsg* 多路
+# 默认 multi_instance；可用 launch deployment:=gateway 覆盖。
+# 配合 usb_cam_multi / 多路 usb_cam（namespace cam0…cam3）→ /camN/tbmem_img
+#
+# max_channel_count: 本文件槽位数（最大路数）
+# channel_count: 默认启用路数（launch 可用 channel_count:=N 覆盖，1…max）
+#
+#   # 默认启用 2 路（见下方 channel_count）
+#   ros2 launch topsbot_webviz webviz_multi.launch.py
+#   # 四路全开
+#   ros2 launch topsbot_webviz webviz_multi.launch.py channel_count:=4
+/**:
+  ros__parameters:
+    deployment: multi_instance
+    stamp_align: strict
+    ws_base_port: 8080
+    queue_max: 50
+    jpeg_quality: 75
+    # 多路调用会在进程间串行化，保持 ta-cv 硬编优先。
+    enable_tacv_jpeg: true
+    max_channel_count: 4
+    channel_count: 2
+    ch0_id: 0
+    ch0_name: Cam-01
+    ch0_input_msg: tb_img
+    ch0_tb_img_profile: 480p
+    ch0_input_topic: /cam0/tbmem_img
+    ch0_detection_topic: /cam0/detections
+    ch0_detection_enabled: false
+    ch1_id: 1
+    ch1_name: Cam-02
+    ch1_input_msg: tb_img
+    ch1_tb_img_profile: 480p
+    ch1_input_topic: /cam1/tbmem_img
+    ch1_detection_topic: /cam1/detections
+    ch1_detection_enabled: false
+    ch2_id: 2
+    ch2_name: Cam-03
+    ch2_input_msg: tb_img
+    ch2_tb_img_profile: 480p
+    ch2_input_topic: /cam2/tbmem_img
+    ch2_detection_topic: /cam2/detections
+    ch2_detection_enabled: false
+    ch3_id: 3
+    ch3_name: Cam-04
+    ch3_input_msg: tb_img
+    ch3_tb_img_profile: 480p
+    ch3_input_topic: /cam3/tbmem_img
+    ch3_detection_topic: /cam3/detections
+    ch3_detection_enabled: false
